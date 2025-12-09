@@ -1,7 +1,4 @@
-﻿// main.js
-import { MindARThree } from "./libs/three.js";
-
-const startButton = document.getElementById("startButton");
+﻿const startButton = document.getElementById("startButton");
 
 startButton.addEventListener("click", async () => {
     startButton.style.display = "none";

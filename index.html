@@ -1,49 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>MindAR WebAR iOS Test</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <!-- iOS needs https + user gesture to start camera; keep UI simple -->
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #000;
-      touch-action: none; /* helps with gestures */
-    }
-    #startButton {
-      position: absolute;
-      z-index: 10;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 12px 24px;
-      font-size: 16px;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <button id="startButton">Start AR</button>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LIVR AR Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-    "mindar-image-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
-  }
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/renderers/CSS3DRenderer.js"></script>
-  <script src="./libs/three.min.js"></script>
-  <script src="./libs/three.js"></script>
-  <script type="module" src="app.js"></script>
-</body>
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- AR.js with Image Tracking (NFT) -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <style>
+      body { margin: 0; overflow: hidden; }
+    </style>
+  </head>
+
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      embedded
+      renderer="logarithmicDepthBuffer: true; antialias: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+    >
+      <!-- Camera -->
+      <a-entity camera></a-entity>
+
+      <!-- NFT image target -->
+      <!-- "url" points to the *base name* of your marker files (no extension) -->
+      <a-nft
+        type="nft"
+        url="markers/myTarget"   <!-- will resolve myTarget.fset, .fset3, .iset -->
+        smooth="true"
+        smoothCount="10"
+        smoothTolerance="0.01"
+        smoothThreshold="5"
+      >
+        <!-- Replace this with your Unity GLB model later -->
+        <a-box position="0 0.5 0" depth="0.5" height="0.5" width="0.5" color="#4CC3D9"></a-box>
+      </a-nft>
+    </a-scene>
+  </body>
 </html>

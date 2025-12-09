@@ -1,5 +1,5 @@
 ﻿// main.js
-import { MindARThree } from "https://unpkg.com/mind-ar/dist/mindar-image-three.prod.js";
+import { MindARThree } from "./libs/three.js";
 
 const startButton = document.getElementById("startButton");
 

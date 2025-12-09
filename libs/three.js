@@ -3,7 +3,7 @@ import * as tf from '@tensorflow/tfjs';
 //import { CSS3DRenderer } from '../libs/CSS3DRenderer.js';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer.js'
 import { Controller } from "./controller.js";
-import { UI } from "../ui/ui.js";
+import { UI } from "./ui.js";
 
 const cssScaleDownMatrix = new Matrix4();
 cssScaleDownMatrix.compose(new Vector3(), new Quaternion(), new Vector3(0.001, 0.001, 0.001));

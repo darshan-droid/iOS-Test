@@ -1,5 +1,5 @@
 import { Matrix4, Vector3, Quaternion, Scene, WebGLRenderer, PerspectiveCamera, Group, sRGBEncoding } from "./three.min.js";
-import * as tf from '@tensorflow/tfjs';
+import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js';
 //import { CSS3DRenderer } from '../libs/CSS3DRenderer.js';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer.js'
 import { Controller } from "./controller.js";

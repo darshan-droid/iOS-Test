@@ -2,43 +2,86 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>LIVR AR Test</title>
+    <title>iOS WebAR Image Target</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- AR.js with Image Tracking (NFT) -->
+    <!-- AR.js with NFT image tracking -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
     <style>
-      body { margin: 0; overflow: hidden; }
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      /* Simple HUD overlay for later UI */
+      #hud {
+        position: fixed;
+        top: env(safe-area-inset-top, 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        padding: 6px 12px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-radius: 8px;
+        font-size: 14px;
+      }
     </style>
   </head>
 
   <body>
+    <!-- HUD overlay -->
+    <div id="hud">Point your camera at the image target</div>
+
     <a-scene
       vr-mode-ui="enabled: false"
-      embedded
       renderer="logarithmicDepthBuffer: true; antialias: true;"
+      embedded
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
     >
-      <!-- Camera -->
-      <a-entity camera></a-entity>
+      <!-- Camera with mouse-based cursor (for clicks/taps later) -->
+      <a-entity
+        camera
+        cursor="rayOrigin: mouse"
+        raycaster="objects: .clickable">
+      </a-entity>
 
       <!-- NFT image target -->
-      <!-- "url" points to the *base name* of your marker files (no extension) -->
+      <!-- url = base path WITHOUT extension -->
       <a-nft
         type="nft"
-        url="markers/myTarget"   <!-- will resolve myTarget.fset, .fset3, .iset -->
+        url="markers/myTarget"
         smooth="true"
         smoothCount="10"
         smoothTolerance="0.01"
         smoothThreshold="5"
       >
-        <!-- Replace this with your Unity GLB model later -->
-        <a-box position="0 0.5 0" depth="0.5" height="0.5" width="0.5" color="#4CC3D9"></a-box>
+        <!-- Your Unity model -->
+        <a-entity
+          id="mymodel"
+          class="clickable"
+          gltf-model="url(models/myModel.glb)"
+          position="0 0 0"
+          rotation="0 0 0"
+          scale="0.1 0.1 0.1">
+        </a-entity>
       </a-nft>
     </a-scene>
+
+    <script>
+      // Example: basic click handler on your model (for later mini-game)
+      const model = document.getElementById('mymodel');
+      model.addEventListener('click', () => {
+        console.log('Model clicked!');
+        // e.g. change scale for a hit effect
+        model.setAttribute('scale', '0.12 0.12 0.12');
+        setTimeout(() => model.setAttribute('scale', '0.1 0.1 0.1'), 150);
+      });
+    </script>
   </body>
 </html>

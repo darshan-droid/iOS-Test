@@ -1,4 +1,4 @@
-import { Matrix4, Vector3, Quaternion, Scene, WebGLRenderer, PerspectiveCamera, Group, sRGBEncoding } from "./three.module.js";
+import { Matrix4, Vector3, Quaternion, Scene, WebGLRenderer, PerspectiveCamera, Group, sRGBEncoding } from "three";
 import * as tf from '@tensorflow/tfjs';
 //import { CSS3DRenderer } from '../libs/CSS3DRenderer.js';
 import {CSS3DRenderer} from 'three/addons/renderers/CSS3DRenderer.js'

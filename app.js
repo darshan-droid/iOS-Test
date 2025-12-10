@@ -24,7 +24,6 @@ startButton.addEventListener("click", async () => {
 
     anchor.group.add(cube);
 
-    // (Optional) React to target found/lost
     anchor.onTargetFound = () => {
         console.log("Target found!");
     };

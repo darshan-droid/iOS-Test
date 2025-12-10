@@ -2,14 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>iOS WebAR Image Target</title>
+    <title>iOS WebAR Image Target Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- AR.js with NFT image tracking -->
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <!-- AR.js with NFT tracking -->
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar-nft.js"></script>
 
     <style>
       body {
@@ -17,11 +17,9 @@
         overflow: hidden;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       }
-
-      /* Simple HUD overlay for later UI */
       #hud {
         position: fixed;
-        top: env(safe-area-inset-top, 10px);
+        top: env(safe-area-inset-top, 8px);
         left: 50%;
         transform: translateX(-50%);
         z-index: 10;
@@ -29,14 +27,13 @@
         background: rgba(0, 0, 0, 0.5);
         color: #fff;
         border-radius: 8px;
-        font-size: 14px;
+        font-size: 13px;
       }
     </style>
   </head>
 
   <body>
-    <!-- HUD overlay -->
-    <div id="hud">Point your camera at the image target</div>
+    <div id="hud">Point your camera at the DirQRCode image</div>
 
     <a-scene
       vr-mode-ui="enabled: false"
@@ -44,7 +41,7 @@
       embedded
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
     >
-      <!-- Camera with mouse-based cursor (for clicks/taps later) -->
+      <!-- Camera with click support for later -->
       <a-entity
         camera
         cursor="rayOrigin: mouse"
@@ -52,36 +49,25 @@
       </a-entity>
 
       <!-- NFT image target -->
-      <!-- url = base path WITHOUT extension -->
+      <!-- IMPORTANT: base path WITHOUT extension -->
       <a-nft
         type="nft"
-        url="Marker/DirQRCode"
+        url="marker/DirQRCode"
         smooth="true"
         smoothCount="10"
         smoothTolerance="0.01"
         smoothThreshold="5"
       >
-        <!-- Your Unity model -->
+        <!-- Simple model -->
         <a-entity
           id="mymodel"
           class="clickable"
-          gltf-model="url(models/MyModel.GLB)"
+          gltf-model="url(models/mymodel.glb)"
           position="0 0 0"
           rotation="0 0 0"
           scale="0.1 0.1 0.1">
         </a-entity>
       </a-nft>
     </a-scene>
-
-    <script>
-      // Example: basic click handler on your model (for later mini-game)
-      const model = document.getElementById('mymodel');
-      model.addEventListener('click', () => {
-        console.log('Model clicked!');
-        // e.g. change scale for a hit effect
-        model.setAttribute('scale', '0.12 0.12 0.12');
-        setTimeout(() => model.setAttribute('scale', '0.1 0.1 0.1'), 150);
-      });
-    </script>
   </body>
 </html>
